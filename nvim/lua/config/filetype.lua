@@ -1,0 +1,4 @@
+require("filetype").setup({
+  overrides = {
+  },
+})
