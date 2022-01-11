@@ -255,8 +255,8 @@ util.nnoremap("N", "'nN'[v:searchforward]", { expr = true })
 util.xnoremap("N", "'nN'[v:searchforward]", { expr = true })
 util.onoremap("N", "'nN'[v:searchforward]", { expr = true })
 
---file explorer with telescope
-util.nnoremap("<C-n>","<cmd>NvimTreeToggle<cr>")
+-- file explorer with telescope
+-- util.nnoremap("<C-n>","<cmd>NvimTreeToggle<cr>")
 
 -- makes * and # work on visual mode too.
 vim.api.nvim_exec(
