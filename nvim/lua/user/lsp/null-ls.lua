@@ -12,11 +12,6 @@ null_ls.setup({
 	debug = false,
   sources={
 	formatting.prettierd,
-  formatting.stylua,
-  formatting.fish_indent,
   formatting.fixjson.with({ filetypes = { "jsonc" } }),
-  diagnostics.shellcheck,
-  diagnostics.markdownlint,
-  diagnostics.selene,
   }
 })

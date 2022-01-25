@@ -9,6 +9,8 @@ local keymap = vim.api.nvim_set_keymap
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+keymap("i","jk", "<esc>",opts)
+keymap("i","kj", "<esc>",opts)
 
 -- Modes
 --   normal_mode = "n",
@@ -18,52 +20,59 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- map m anf M to ; and ,
+keymap("n","m",";",opts)
+keymap("n","M",",",opts)
+keymap("v","m",";",opts)
+keymap("v","M",",",opts)
 
--- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+-- Move to window using the <ctrl> movement keys
+keymap("n","<C-h>", "<C-w>h",opts)
+keymap("n","<C-j>", "<C-w>j",opts)
+keymap("n","<C-k>", "<C-w>k",opts)
+keymap("n","<C-l>", "<C-w>l",opts)
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+--jump list movement
+keymap("n","<",'<C-o>',opts)
+keymap("n",">",'<C-i>',opts)
 
--- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+--serouund text with prenthesis
+keymap('v',"<Leader>'", " <esc>`>a'<esc>`<i'<esc>",opts)
+keymap('v','<Leader>"', '<esc>`>a"<esc>`<i"<esc>',opts)
+keymap('v',"<Leader>`", "<esc>`>a`<esc>`<i`<esc>",opts)
+keymap('v',"<Leader>(", "<esc>`>a)<esc>`<i(<esc>",opts)
+keymap('v',"<Leader>{", "<esc>`>a}<esc>`<i{<esc>",opts)
+keymap('v',"<Leader>[", "<esc>`>a]<esc>`<i[<esc>",opts)
 
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
+--insert new line without going into insert mode
+keymap('n',"<leader>k",  ":<c-u>put!=repeat([''],v:count)<bar>']+1<cr>",opts)
+keymap('n',"<leader>j",  ":<c-u>put =repeat([''],v:count)<bar>'[-1<cr>",opts)
 
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+--move lines and selected lines
+keymap("n",'-', '"ldd$"lp',opts)
+keymap("n",'_', '"ldd2k"lp',opts)
+keymap("v",'_', ":'<,'> m '<-2<CR>gv",opts)
+keymap("v",'-', ":'<,'> m '>+1<CR>gv",opts)
 
--- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
+--yank visualy selected to clipboard
+keymap("v","<Leader>y", '"*y',opts)
 
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+--open and close tabs woth leader n and leader N
+keymap("n","<Leader>n" ,":tabnew<CR>",opts)
+keymap("n","<Leader>N" ,":tabclose<CR>",opts)
 
--- Terminal --
--- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- Resize window using <ctrl> arrow keys
+keymap("n","<S-Up>", ":resize +2<CR>",opts)
+keymap("n","<S-Down>", ":resize -2<CR>",opts)
+keymap("n","<S-Left>", ":vertical resize -2<CR>",opts)
+keymap("n","<S-Right>", ":vertical resize +2<CR>",opts)
 
+-- Clear search with <esc>
+keymap("n","<esc>", ":noh<cr>",opts)
+
+-- NOT WORKING: exit insert mode with jj
+--keymap("i","jj", "<esc>",opts)
+
+-- past from yank buffer
+keymap("n","<Leader>P",'"0P',opts)
+keymap("n","<Leader>p",'"0p',opts)
