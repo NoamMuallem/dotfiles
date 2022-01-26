@@ -103,14 +103,7 @@ return packer.startup(function(use)
   -- Git
   use "lewis6991/gitsigns.nvim"
   use("TimUntersberger/neogit")
-  use({
-    "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-    module = "diffview",
-    config = function()
-      require("diffview").setup({})
-    end,
-  })
+  use("sindrets/diffview.nvim")
 
   -- Css colors:
   use({

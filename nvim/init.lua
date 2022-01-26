@@ -20,5 +20,6 @@ require "user.whichkey"
 require "user.autocommands"
 require "user.neogit"
 require "user.colorizer"
+require "user.diffview"
 
 
