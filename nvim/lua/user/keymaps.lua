@@ -1,7 +1,5 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
-
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
@@ -9,9 +7,6 @@ local keymap = vim.api.nvim_set_keymap
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-keymap("i","jk", "<esc>",opts)
-keymap("i","kj", "<esc>",opts)
-
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -36,13 +31,6 @@ keymap("n","<C-l>", "<C-w>l",opts)
 keymap("n","<",'<C-o>',opts)
 keymap("n",">",'<C-i>',opts)
 
---serouund text with prenthesis
-keymap('v',"<Leader>'", " <esc>`>a'<esc>`<i'<esc>",opts)
-keymap('v','<Leader>"', '<esc>`>a"<esc>`<i"<esc>',opts)
-keymap('v',"<Leader>`", "<esc>`>a`<esc>`<i`<esc>",opts)
-keymap('v',"<Leader>(", "<esc>`>a)<esc>`<i(<esc>",opts)
-keymap('v',"<Leader>{", "<esc>`>a}<esc>`<i{<esc>",opts)
-keymap('v',"<Leader>[", "<esc>`>a]<esc>`<i[<esc>",opts)
 
 --insert new line without going into insert mode
 keymap('n',"<leader>k",  ":<c-u>put!=repeat([''],v:count)<bar>']+1<cr>",opts)
@@ -70,9 +58,23 @@ keymap("n","<S-Right>", ":vertical resize +2<CR>",opts)
 -- Clear search with <esc>
 keymap("n","<esc>", ":noh<cr>",opts)
 
--- NOT WORKING: exit insert mode with jj
---keymap("i","jj", "<esc>",opts)
-
 -- past from yank buffer
 keymap("n","<Leader>P",'"0P',opts)
 keymap("n","<Leader>p",'"0p',opts)
+
+
+--serouund text with prenthesis
+keymap('v',"<Leader>'", " <esc>`>a'<esc>`<i'<esc>",opts)
+keymap('v','<Leader>"', '<esc>`>a"<esc>`<i"<esc>',opts)
+keymap('v',"<Leader>`", "<esc>`>a`<esc>`<i`<esc>",opts)
+keymap('v',"<Leader>(", "<esc>`>a)<esc>`<i(<esc>",opts)
+keymap('v',"<Leader>{", "<esc>`>a}<esc>`<i{<esc>",opts)
+keymap('v',"<Leader>[", "<esc>`>a]<esc>`<i[<esc>",opts)
+
+ --open nvim tree
+keymap('n',"<C-n>", "<cmd>NvimTreeToggle<cr>",opts)
+
+--telescope file browser
+keymap('n',"<Leader>fb", ":Telescope file_browser<CR>",opts)
+
+keymap("i","jj", "<esc>",opts)

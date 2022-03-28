@@ -57,6 +57,15 @@ return packer.startup(function(use)
   use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
+  use "nvim-telescope/telescope-file-browser.nvim"
+  use {
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  config = function()
+    require("trouble").setup {
+    }
+  end
+}
   use({
     "SmiteshP/nvim-gps",
     requires = "nvim-treesitter/nvim-treesitter",

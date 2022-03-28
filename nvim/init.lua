@@ -1,5 +1,3 @@
-require "user.options"
-require "user.keymaps"
 require "user.plugins"
 require "user.colorscheme"
 require "user.cmp"
@@ -21,5 +19,5 @@ require "user.autocommands"
 require "user.neogit"
 require "user.colorizer"
 require "user.diffview"
-
-
+require "user.options"
+require "user.keymaps"

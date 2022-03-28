@@ -13,5 +13,7 @@ null_ls.setup({
   sources={
 	formatting.prettierd,
   formatting.fixjson.with({ filetypes = { "jsonc" } }),
+  formatting.prettierd,
+  formatting.eslint_d,
   }
 })
