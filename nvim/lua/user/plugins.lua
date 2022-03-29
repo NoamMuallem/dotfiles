@@ -67,6 +67,12 @@ return packer.startup(function(use)
     }
   end
   }
+
+  use({
+    "andymass/vim-matchup",
+    event = "CursorMoved",
+  })
+
   use({
     "phaazon/hop.nvim",
     keys = { "gh" },
