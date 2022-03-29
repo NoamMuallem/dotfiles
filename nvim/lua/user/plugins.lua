@@ -63,9 +63,23 @@ return packer.startup(function(use)
   requires = "kyazdani42/nvim-web-devicons",
   config = function()
     require("trouble").setup {
+      -- refer to the configuration section below
     }
   end
-}
+  }
+  use({
+    "phaazon/hop.nvim",
+    keys = { "gh" },
+    cmd = { "HopWord", "HopChar1" },
+    config = function()
+      require("hop").setup({})
+      -- changed the color on hints:
+      vim.cmd("hi HopNextKey guifg=#ff9900")
+      vim.cmd("hi HopNextKey1 guifg=#ff9900")
+      vim.cmd("hi HopNextKey2 guifg=#ff9900")
+    end,
+  })
+
   use({
     "SmiteshP/nvim-gps",
     requires = "nvim-treesitter/nvim-treesitter",

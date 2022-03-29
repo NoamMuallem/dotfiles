@@ -71,6 +71,9 @@ keymap('v',"<Leader>(", "<esc>`>a)<esc>`<i(<esc>",opts)
 keymap('v',"<Leader>{", "<esc>`>a}<esc>`<i{<esc>",opts)
 keymap('v',"<Leader>[", "<esc>`>a]<esc>`<i[<esc>",opts)
 
+-- hop
+keymap('n',"<Leader>h", ":HopWord<CR>",opts)
+
  --open nvim tree
 keymap('n',"<C-n>", "<cmd>NvimTreeToggle<cr>",opts)
 
