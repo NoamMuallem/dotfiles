@@ -144,4 +144,9 @@ return packer.startup(function(use)
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
+
+  -- when cursor move over closing scope symbole, the scope opnning line will appear instead of the status line
+  vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'vim-matchup'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
+
 end)
+
