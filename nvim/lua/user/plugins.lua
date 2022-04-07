@@ -59,6 +59,17 @@ return packer.startup(function(use)
   use "folke/which-key.nvim"
   use "nvim-telescope/telescope-file-browser.nvim"
   use {
+	"luukvbaal/stabilize.nvim",
+	config = function() require("stabilize").setup() end
+  }
+  use({
+    "petertriho/nvim-scrollbar",
+  config = function()
+      require("scrollbar").setup()
+  end
+  })
+
+  use {
   "folke/trouble.nvim",
   requires = "kyazdani42/nvim-web-devicons",
   config = function()
@@ -86,15 +97,10 @@ return packer.startup(function(use)
     end,
   })
 
-  use({
-    "SmiteshP/nvim-gps",
-    requires = "nvim-treesitter/nvim-treesitter",
-    wants = "nvim-treesitter",
-    module = "nvim-gps",
-    config = function()
-      require("nvim-gps").setup({ separator = "   " })
-    end,
-  })
+  use {
+  	"SmiteshP/nvim-gps",
+  	requires = "nvim-treesitter/nvim-treesitter"
+  }
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
