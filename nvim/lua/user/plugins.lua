@@ -50,7 +50,6 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-tree.lua"
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
@@ -68,14 +67,25 @@ return packer.startup(function(use)
       require("scrollbar").setup()
   end
   })
+  use {
+  "narutoxy/dim.lua",
+  requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
+  config = function()
+    require('dim').setup({})
+  end
+}
+
+  use { 'alvarosevilla95/luatab.nvim',
+    requires='kyazdani42/nvim-web-devicons',
+  config = function()
+      require('luatab').setup{}
+    end}
 
   use {
   "folke/trouble.nvim",
   requires = "kyazdani42/nvim-web-devicons",
   config = function()
-    require("trouble").setup {
-      -- refer to the configuration section below
-    }
+    require("trouble").setup {}
   end
   }
 
@@ -150,9 +160,6 @@ return packer.startup(function(use)
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
-
-  -- when cursor move over closing scope symbole, the scope opnning line will appear instead of the status line
-  vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'vim-matchup'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
 
 end)
 
