@@ -44,7 +44,6 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   use({
     "kyazdani42/nvim-tree.lua",
@@ -72,9 +71,14 @@ return packer.startup(function(use)
   use "folke/which-key.nvim" -- shows available commands durring input
   use({
     "petertriho/nvim-scrollbar",
-  config = function()
-      require("scrollbar").setup()
-  end
+    event = "BufReadPre",
+    config = function()
+        require("scrollbar").setup({
+        handle = {
+        color = "#2c2c2c",
+    },
+      })
+    end
   }) -- scrollbar with diagnostics
   use {
   "narutoxy/dim.lua",
