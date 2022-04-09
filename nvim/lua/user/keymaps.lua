@@ -80,4 +80,8 @@ keymap('n',"<C-n>", "<cmd>NvimTreeToggle<cr>",opts)
 --telescope file browser
 keymap('n',"<Leader>fb", ":Telescope file_browser<CR>",opts)
 
+--trouble
+keymap('n',"<Leader>xx", "<cmd>TroubleToggle<cr>",opts)
+
+--exit edit mode
 keymap("i","jj", "<esc>",opts)
