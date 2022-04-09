@@ -44,60 +44,77 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
-  use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"
-  use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
-  use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim"
+  use({
+    "kyazdani42/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeClose" },
+    config = function()
+      require("user.nvim-tree")
+    end,
+  }) --project tree plugin
+  use({
+    "nvim-lualine/lualine.nvim",
+    event = "VimEnter",
+    config = [[require('user.lualine')]],
+    wants = "nvim-web-devicons"
+  }) -- status line
+  use "lewis6991/impatient.nvim" -- faster startup time
+    use({
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPre",
+    config = function()
+      require("user.indentline")
+    end,
+  }) -- ident lines
+  use "goolord/alpha-nvim" -- startup menu
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "folke/which-key.nvim"
-  use "nvim-telescope/telescope-file-browser.nvim"
-  use {
-	"luukvbaal/stabilize.nvim",
-	config = function() require("stabilize").setup() end
-  }
+  use "folke/which-key.nvim" -- shows available commands durring input
   use({
     "petertriho/nvim-scrollbar",
   config = function()
       require("scrollbar").setup()
   end
-  })
+  }) -- scrollbar with diagnostics
   use {
   "narutoxy/dim.lua",
   requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
   config = function()
     require('dim').setup({})
-  end
-}
+  end} -- dim out variables and functions that are unused
+
+  use({ "stevearc/dressing.nvim", event = "BufReadPre" }) -- ui components
 
   use { 'alvarosevilla95/luatab.nvim',
     requires='kyazdani42/nvim-web-devicons',
-  config = function()
+    event = "BufReadPre",
+    wants = "nvim-web-devicons",
+    config = function()
       require('luatab').setup{}
-    end}
+    end} -- tabline
 
-  use {
-  "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  config = function()
-    require("trouble").setup {}
-  end
-  }
+  use({
+    "folke/trouble.nvim",
+    event = "BufReadPre",
+    wants = "nvim-web-devicons",
+    cmd = { "TroubleToggle", "Trouble" },
+    config = function()
+      require("trouble").setup({
+        auto_open = false,
+        use_diagnostic_signs = true, -- en
+      })
+    end,
+  }) -- cool and usefull diagnostics manu
 
   use({
     "andymass/vim-matchup",
     event = "CursorMoved",
-  })
+  }) -- shows openning/ closing scope line instead of the statuse line when cursore holds on closing/ openning of scope
 
   use({
     "phaazon/hop.nvim",
     keys = { "gh" },
-    cmd = { "HopWord", "HopChar1" },
+    cmd = "HopWord",
     config = function()
       require("hop").setup({})
       -- changed the color on hints:
@@ -105,54 +122,121 @@ return packer.startup(function(use)
       vim.cmd("hi HopNextKey1 guifg=#ff9900")
       vim.cmd("hi HopNextKey2 guifg=#ff9900")
     end,
-  })
+  }) -- move to any word on the buffer (quick navigation)
 
-  use {
-  	"SmiteshP/nvim-gps",
-  	requires = "nvim-treesitter/nvim-treesitter"
-  }
+  -- use({
+  --   "SmiteshP/nvim-gps",
+  --   requires = "nvim-treesitter/nvim-treesitter",
+  --   wants = "nvim-treesitter",
+  --   module = "nvim-gps",
+  --   config = function()
+  --     require("nvim-gps").setup({ separator = " " })
+  --   end,
+  -- }) -- gives the rout of the buffer
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
   use 'folke/tokyonight.nvim'
 
-  -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
+  use({
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    opt = true,
+    config = function()
+      require("user.cmp")
+    end,
+    wants = { "LuaSnip" },
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-cmdline",
+      {
+        "L3MON4D3/LuaSnip",
+        wants = "friendly-snippets",
+      },
+      "rafamadriz/friendly-snippets",
+      {
+        module = "nvim-autopairs",
+        "windwp/nvim-autopairs",
+        config = function()
+          require("user.autopairs")
+        end,
+      },
+    },
+  }) -- completion + snippets + autopairs (closing automatically '(' and '{' etc...)
 
-  -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+    use({
+    "neovim/nvim-lspconfig",
+    opt = true,
+    event = "BufReadPre",
+    wants = {
+      "null-ls.nvim",
+      "cmp-nvim-lsp",
+      "nvim-lsp-installer",
+    },
+    config = function()
+      require("user.lsp.init")
+    end,
+    requires = {
+      "tamago324/nlsp-settings.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+      "williamboman/nvim-lsp-installer",
+    },
+  }) -- lsp
 
-  -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
   -- Telescope
-  use "nvim-telescope/telescope.nvim"
+  use({"nvim-telescope/telescope.nvim", cmd = {"Telescope"}})
 
   -- Treesitter
-  use {
+  use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-  }
-  use "JoosepAlviste/nvim-ts-context-commentstring"
+    opt = true,
+    event = "BufRead",
+    config = function()
+      require("user.treesitter")
+    end,
+  })
 
   -- Git
-  use "lewis6991/gitsigns.nvim"
-  use("TimUntersberger/neogit")
-  use("sindrets/diffview.nvim")
+  use({
+    "lewis6991/gitsigns.nvim",
+    event = "BufReadPre",
+    wants = "plenary.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("user.gitsigns")
+    end,
+  }) -- shows on the left in line hase beed deleted/ modified or added
+
+  use({
+    "TimUntersberger/neogit",
+    module = "neogit",
+    cmd = "Neogit",
+    config = function()
+      require("user.neogit")
+    end,
+  }) -- a tool to execute git actions
+
+  use({
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    config = function()
+      require("diffview").setup({})
+    end,
+  }) -- a tool to show the diff of the current priject state to the last commit
 
   -- Css colors:
   use({
     "norcalli/nvim-colorizer.lua",
+    event = "BufReadPre",
+    config = function()
+      require("user.colorizer")
+    end,
   })
 
   -- Automatically set up your configuration after cloning packer.nvim
