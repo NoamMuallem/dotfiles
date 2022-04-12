@@ -99,9 +99,7 @@ return packer.startup(function(use)
 
   use({
     "folke/trouble.nvim",
-    event = "BufReadPre",
     wants = "nvim-web-devicons",
-    cmd = { "TroubleToggle", "Trouble" },
     config = function()
       require("trouble").setup({
         auto_open = false,
@@ -193,7 +191,12 @@ return packer.startup(function(use)
 
 
   -- Telescope
-  use({"nvim-telescope/telescope.nvim", cmd = {"Telescope"}})
+  use({
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      require("user.telescope")
+    end,
+  })
 
   -- Treesitter
   use({
