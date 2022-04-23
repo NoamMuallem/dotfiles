@@ -101,4 +101,7 @@ end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
+-- show diagnostics on cursore hold
+vim.cmd [[ autocmd CursorHold * lua vim.diagnostic.open_float({ border = "rounded" }) ]]
+
 return M
