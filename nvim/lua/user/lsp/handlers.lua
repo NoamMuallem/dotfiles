@@ -15,7 +15,7 @@ M.setup = function()
 
   local config = {
     -- disable virtual text
-    virtual_text = false,
+    virtual_text = true,
     -- show signs
     signs = {
       active = signs,
@@ -100,8 +100,5 @@ if not status_ok then
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-
--- show diagnostics on cursore hold
-vim.cmd [[ autocmd CursorHold * lua vim.diagnostic.open_float({ border = "rounded" }) ]]
 
 return M
