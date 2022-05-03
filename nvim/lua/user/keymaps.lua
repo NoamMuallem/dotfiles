@@ -5,6 +5,7 @@ local keymap = vim.api.nvim_set_keymap
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 -- Modes
@@ -14,6 +15,9 @@ vim.g.maplocalleader = " "
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+
+-- remap m to z to set marks with
+keymap("n","z","m",opts)
 
 -- map m anf M to ; and ,
 keymap("n","m",";",opts)

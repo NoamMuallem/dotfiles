@@ -52,12 +52,14 @@ return packer.startup(function(use)
       require("user.nvim-tree")
     end,
   }) --project tree plugin
-  use({
-    "nvim-lualine/lualine.nvim",
-    event = "VimEnter",
-    config = [[require('user.lualine')]],
-    wants = "nvim-web-devicons"
-  }) -- status line
+  use {
+  'glepnir/galaxyline.nvim',
+    branch = 'main',
+    -- your statusline
+    config = function() require'user.galaxyline' end,
+    -- some optional icons
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  } -- status line
   use "lewis6991/impatient.nvim" -- faster startup time
     use({
     "lukas-reineke/indent-blankline.nvim",
@@ -69,6 +71,9 @@ return packer.startup(function(use)
   use "goolord/alpha-nvim" -- startup menu
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim" -- shows available commands durring input
+  use {'akinsho/git-conflict.nvim', config = function() -- for resolving git conflicts
+    require('git-conflict').setup()
+  end}
   use({
     "petertriho/nvim-scrollbar",
     event = "BufReadPre",
@@ -135,20 +140,23 @@ return packer.startup(function(use)
     end,
   }) -- move to any word on the buffer (quick navigation)
 
-  -- use({
-  --   "SmiteshP/nvim-gps",
-  --   requires = "nvim-treesitter/nvim-treesitter",
-  --   wants = "nvim-treesitter",
-  --   module = "nvim-gps",
-  --   config = function()
-  --     require("nvim-gps").setup({ separator = " " })
-  --   end,
-  -- }) -- gives the rout of the buffer
+  use({
+    "NoamMuallem/nvim-gps",
+    requires = "nvim-treesitter/nvim-treesitter",
+    wants = "nvim-treesitter",
+    module = "nvim-gps",
+    config = function()
+      require("nvim-gps").setup({ separator = " " })
+    end,
+  }) -- gives the rout of the buffer
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
   use 'folke/tokyonight.nvim'
+  use 'ishan9299/nvim-solarized-lua'
+  use 'patstockwell/vim-monokai-tasty'
+  use "rebelot/kanagawa.nvim"
 
   use({
     "hrsh7th/nvim-cmp",
