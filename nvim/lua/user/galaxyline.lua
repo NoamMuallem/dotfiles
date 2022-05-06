@@ -51,11 +51,11 @@ end
 
 local colors = {
 
-    bg = "#223249	",
-    line_bg = "#353644",
-    fg = '#bbc2cf',
+    bg = "#33373E",
+    line_bg = "#3D4147",
+    fg = '#A3ABB8',
     fg_green = '#65a380',
-  yellow   = '#ECBE7B',
+  yellow   = '#E5C07B',
   cyan     = '#008080',
   darkblue = '#081633',
   green    = '#98be65',
@@ -247,30 +247,6 @@ gls.left[13] = {
   }
 }
 
-gls.left[7] = {
-  DiffAdd = {
-    provider = 'DiffAdd',
-    condition = checkwidth,
-    icon = '   ',
-    highlight = {colors.green,colors.line_bg},
-  }
-}
-gls.left[8] = {
-  DiffModified = {
-    provider = 'DiffModified',
-    condition = checkwidth,
-    icon = '   ',
-    highlight = {colors.orange,colors.line_bg},
-  }
-}
-gls.left[9] = {
-  DiffRemove = {
-    provider = 'DiffRemove',
-    condition = checkwidth,
-    icon = '   ',
-    highlight = {colors.red,colors.line_bg},
-  }
-}
 gls.left[10] = {
   LeftEnd = {
     provider = function() return '' end,

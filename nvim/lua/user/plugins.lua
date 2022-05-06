@@ -150,8 +150,11 @@ return packer.startup(function(use)
     end,
   }) -- gives the rout of the buffer
 
+  use 'p00f/nvim-ts-rainbow' -- color same brackets with same color
+
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
+  use 'olimorris/onedarkpro.nvim'
   use "lunarvim/darkplus.nvim"
   use 'folke/tokyonight.nvim'
   use 'ishan9299/nvim-solarized-lua'
