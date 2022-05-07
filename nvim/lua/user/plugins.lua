@@ -134,9 +134,12 @@ return packer.startup(function(use)
     config = function()
       require("hop").setup({})
       -- changed the color on hints:
-      vim.cmd("hi HopNextKey guifg=#ff9900")
-      vim.cmd("hi HopNextKey1 guifg=#ff9900")
-      vim.cmd("hi HopNextKey2 guifg=#ff9900")
+       vim.cmd("hi HopNextKey guibg=#ff9900")
+       vim.cmd("hi HopNextKey guifg=#000000")
+       vim.cmd("hi HopNextKey1 guibg=#ff9900")
+       vim.cmd("hi HopNextKey1 guifg=#000000")
+       vim.cmd("hi HopNextKey2 guibg=#ff9900")
+       vim.cmd("hi HopNextKey2 guifg=#000000")
     end,
   }) -- move to any word on the buffer (quick navigation)
 
