@@ -123,6 +123,9 @@ return packer.startup(function(use)
     end } -- dim out variables and functions that are unused
 
   use({ "stevearc/dressing.nvim", event = "BufReadPre" }) -- ui components
+  use {
+    "ray-x/lsp_signature.nvim",
+  } -- show function signeture in popup
 
   use { 'alvarosevilla95/luatab.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
