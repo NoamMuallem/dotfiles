@@ -53,15 +53,15 @@ return packer.startup(function(use)
     end,
   }) --project tree plugin
   use {
-  'glepnir/galaxyline.nvim',
+    'glepnir/galaxyline.nvim',
     branch = 'main',
     -- your statusline
-    config = function() require'user.galaxyline' end,
+    config = function() require 'user.galaxyline' end,
     -- some optional icons
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   } -- status line
   use "lewis6991/impatient.nvim" -- faster startup time
-    use({
+  use({
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
     config = function()
@@ -71,45 +71,45 @@ return packer.startup(function(use)
   use "goolord/alpha-nvim" -- startup menu
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim" -- shows available commands durring input
-  use {'akinsho/git-conflict.nvim', config = function() -- for resolving git conflicts
+  use { 'akinsho/git-conflict.nvim', config = function() -- for resolving git conflicts
     require('git-conflict').setup()
-  end}
+  end }
   use({
     "petertriho/nvim-scrollbar",
     event = "BufReadPre",
     config = function()
       local colors = require("tokyonight.colors").setup()
       require("scrollbar").setup({
-          handle = {
-              color = colors.bg_highlight,
-          },
-          marks = {
-              Search = { color = colors.orange },
-              Error = { color = colors.error },
-              Warn = { color = colors.warning },
-              Info = { color = colors.info },
-              Hint = { color = colors.hint },
-              Misc = { color = colors.purple },
-          }
-          })
+        handle = {
+          color = colors.bg_highlight,
+        },
+        marks = {
+          Search = { color = colors.orange },
+          Error = { color = colors.error },
+          Warn = { color = colors.warning },
+          Info = { color = colors.info },
+          Hint = { color = colors.hint },
+          Misc = { color = colors.purple },
+        }
+      })
     end
   }) -- scrollbar with diagnostics
   use {
-  "narutoxy/dim.lua",
-  requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
-  config = function()
-    require('dim').setup({})
-  end} -- dim out variables and functions that are unused
+    "narutoxy/dim.lua",
+    requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
+    config = function()
+      require('dim').setup({})
+    end } -- dim out variables and functions that are unused
 
   use({ "stevearc/dressing.nvim", event = "BufReadPre" }) -- ui components
 
   use { 'alvarosevilla95/luatab.nvim',
-    requires='kyazdani42/nvim-web-devicons',
+    requires = 'kyazdani42/nvim-web-devicons',
     event = "BufReadPre",
     wants = "nvim-web-devicons",
     config = function()
-      require('luatab').setup{}
-    end} -- tabline
+      require('luatab').setup {}
+    end } -- tabline
 
   use({
     "folke/trouble.nvim",
@@ -134,12 +134,12 @@ return packer.startup(function(use)
     config = function()
       require("hop").setup({})
       -- changed the color on hints:
-       vim.cmd("hi HopNextKey guibg=#ff9900")
-       vim.cmd("hi HopNextKey guifg=#000000")
-       vim.cmd("hi HopNextKey1 guibg=#ff9900")
-       vim.cmd("hi HopNextKey1 guifg=#000000")
-       vim.cmd("hi HopNextKey2 guibg=#ff9900")
-       vim.cmd("hi HopNextKey2 guifg=#000000")
+      vim.cmd("hi HopNextKey guibg=#ff9900")
+      vim.cmd("hi HopNextKey guifg=#000000")
+      vim.cmd("hi HopNextKey1 guibg=#ff9900")
+      vim.cmd("hi HopNextKey1 guifg=#000000")
+      vim.cmd("hi HopNextKey2 guibg=#ff9900")
+      vim.cmd("hi HopNextKey2 guifg=#000000")
     end,
   }) -- move to any word on the buffer (quick navigation)
 
@@ -193,9 +193,8 @@ return packer.startup(function(use)
     },
   }) -- completion + snippets + autopairs (closing automatically '(' and '{' etc...)
 
-    use({
+  use({
     "neovim/nvim-lspconfig",
-    opt = true,
     event = "BufReadPre",
     wants = {
       "null-ls.nvim",
@@ -276,4 +275,3 @@ return packer.startup(function(use)
   end
 
 end)
-
