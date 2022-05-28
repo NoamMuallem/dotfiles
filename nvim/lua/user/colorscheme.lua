@@ -28,8 +28,8 @@ onedarkpro.setup({
     undercurl = false, -- Use the themes opinionated undercurl styles?
     cursorline = false, -- Use cursorline highlighting?
     transparency = false, -- Use a transparent background?
-    terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
-    window_unfocussed_color = true, -- When the window is out of focus, change the normal background?
+    terminal_colors = false, -- Use the theme's colors for Neovim's :terminal?
+    window_unfocussed_color = false, -- When the window is out of focus, change the normal background?
   }
 })
 onedarkpro.load()
