@@ -49,20 +49,20 @@ end
 -- then change in colors line_bg = get_color_bg
 
 local colors = {
-
-  bg       = "#33373E",
-  line_bg  = "#3D4147",
-  fg       = '#A3ABB8',
-  fg_green = '#65a380',
-  yellow   = '#E5C07B',
-  cyan     = '#008080',
-  darkblue = '#081633',
-  green    = '#98be65',
-  orange   = '#FF8800',
-  purple   = '#5d4d7a',
-  magenta  = '#c678dd',
-  blue     = '#51afef',
-  red      = '#ec5f67',
+  bg        = "#33373E",
+  line_bg   = "#3D4147",
+  fg        = "#abb2bf",
+  red       = "#e06c75",
+  orange    = "#d19a66",
+  yellow    = "#e5c07b",
+  green     = "#98c379",
+  cyan      = "#56b6c2",
+  blue      = "#61afef",
+  purple    = "#c678dd",
+  white     = "#abb2bf",
+  black     = "#282c34",
+  gray      = "#5c6370",
+  highlight = "#e2be7d",
 }
 
 
@@ -221,14 +221,14 @@ gls.left[5] = {
   GitIcon = {
     provider = function() return '  ' end,
     condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = { colors.yellow, colors.line_bg },
+    highlight = { colors.blue, colors.line_bg },
   }
 }
 gls.left[6] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = { colors.yellow, colors.line_bg, 'bold' },
+    highlight = { colors.blue, colors.line_bg, 'bold' },
   }
 }
 
@@ -258,7 +258,7 @@ gls.left[11] = {
   TrailingWhiteSpace = {
     provider = TrailingWhiteSpace,
     icon = '   ',
-    highlight = { colors.yellow, colors.bg },
+    highlight = { colors.blue, colors.bg },
   }
 }
 
@@ -285,7 +285,7 @@ gls.left[16] = {
   CocFunc = {
     provider = CocFunc,
     icon = ' ',
-    highlight = { colors.yellow, colors.bg },
+    highlight = { colors.blue, colors.bg },
   }
 }
 
@@ -294,7 +294,7 @@ gls.left[17] = {
     provider = TreesitterContext,
     condition = has_file_prog_filetype,
     icon = '  λ ',
-    highlight = { colors.yellow, colors.bg },
+    highlight = { colors.blue, colors.bg },
   }
 }
 
@@ -307,7 +307,7 @@ gls.left[17] = {
       return gps.is_available()
     end,
     icon = '  ',
-    highlight = { colors.yellow, colors.bg },
+    highlight = { colors.blue, colors.bg },
   }
 }
 
@@ -316,8 +316,8 @@ gls.short_line_right[1] = {
     provider = 'BufferIcon',
     separator = '',
     condition = has_file_type,
-    separator_highlight = { colors.purple, colors.bg },
-    highlight = { colors.fg, colors.purple }
+    separator_highlight = { colors.blue, colors.bg },
+    highlight = { colors.fg, colors.blue }
   }
 }
 
