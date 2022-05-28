@@ -16,7 +16,7 @@ M.setup = function()
   local config = {
     -- disable virtual text
     virtual_text = {
-      source = "if_many",
+      source = "always",
       prefix = '🐛',
     },
     -- show signs
