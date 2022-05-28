@@ -101,6 +101,9 @@ return packer.startup(function(use)
     end } -- dim out variables and functions that are unused
 
   use({ "stevearc/dressing.nvim", event = "BufReadPre" }) -- ui components
+  use {
+    "ray-x/lsp_signature.nvim",
+  } -- show function signeture in popup
 
   use { 'alvarosevilla95/luatab.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
@@ -156,7 +159,12 @@ return packer.startup(function(use)
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use 'olimorris/onedarkpro.nvim'
+  use {
+    'olimorris/onedarkpro.nvim',
+    config = function()
+      require("user.colorscheme")
+    end
+  }
   use "lunarvim/darkplus.nvim"
   use 'folke/tokyonight.nvim'
   use 'ishan9299/nvim-solarized-lua'
@@ -218,6 +226,10 @@ return packer.startup(function(use)
       require("user.telescope")
     end,
   })
+  use { 'ibhagwan/fzf-lua',
+    -- optional for icon support
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  } --fzf lua
 
   -- Treesitter
   use({
