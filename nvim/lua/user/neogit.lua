@@ -1,5 +1,5 @@
 require("neogit").setup({
-  kind = "split",
+  kind = "tab",
   signs = {
     -- { CLOSED, OPENED }
     section = { "", "" },

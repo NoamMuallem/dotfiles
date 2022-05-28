@@ -45,6 +45,34 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "kyazdani42/nvim-web-devicons"
+  use "lewis6991/impatient.nvim" -- faster startup time
+  use "goolord/alpha-nvim" -- startup menu
+  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+  use "folke/which-key.nvim" -- shows available commands durring input
+  -- Telescope
+  use({
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      require("user.telescope")
+    end,
+    requires = {
+      "nvim-telescope/telescope-z.nvim",
+      "nvim-telescope/telescope-project.nvim",
+      "nvim-telescope/telescope-symbols.nvim",
+      "nvim-telescope/telescope-fzy-native.nvim",
+      -- { "nvim-telescope/telescope-frecency.nvim", requires = "tami5/sql.nvim" }
+    },
+  })
+  use({
+    "folke/trouble.nvim",
+    wants = "nvim-web-devicons",
+    config = function()
+      require("trouble").setup({
+        auto_open = false,
+        use_diagnostic_signs = true, -- en
+      })
+    end,
+  }) -- cool and usefull diagnostics manu
   use({
     "kyazdani42/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeClose" },
@@ -54,13 +82,13 @@ return packer.startup(function(use)
   }) --project tree plugin
   use {
     'glepnir/galaxyline.nvim',
+    after = 'onedarkpro.nvim',
     branch = 'main',
     -- your statusline
     config = function() require 'user.galaxyline' end,
     -- some optional icons
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   } -- status line
-  use "lewis6991/impatient.nvim" -- faster startup time
   use({
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
@@ -68,17 +96,10 @@ return packer.startup(function(use)
       require("user.indentline")
     end,
   }) -- ident lines
-  use "goolord/alpha-nvim" -- startup menu
-  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "folke/which-key.nvim" -- shows available commands durring input
-  use { 'akinsho/git-conflict.nvim', config = function() -- for resolving git conflicts
-    require('git-conflict').setup()
-  end }
   use({
     "petertriho/nvim-scrollbar",
     event = "BufReadPre",
     config = function()
-      local colors = require("tokyonight.colors").setup()
       require("scrollbar").setup({
         handle = {
           color = "#33373E",
@@ -95,6 +116,7 @@ return packer.startup(function(use)
   }) -- scrollbar with diagnostics
   use {
     "narutoxy/dim.lua",
+    event = "BufReadPre",
     requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
     config = function()
       require('dim').setup({})
@@ -110,16 +132,6 @@ return packer.startup(function(use)
       require('luatab').setup {}
     end } -- tabline
 
-  use({
-    "folke/trouble.nvim",
-    wants = "nvim-web-devicons",
-    config = function()
-      require("trouble").setup({
-        auto_open = false,
-        use_diagnostic_signs = true, -- en
-      })
-    end,
-  }) -- cool and usefull diagnostics manu
 
   use({
     "andymass/vim-matchup",
@@ -144,6 +156,7 @@ return packer.startup(function(use)
 
   use({
     "NoamMuallem/nvim-gps",
+    event = "BufReadPre",
     requires = "nvim-treesitter/nvim-treesitter",
     wants = "nvim-treesitter",
     module = "nvim-gps",
@@ -152,16 +165,15 @@ return packer.startup(function(use)
     end,
   }) -- gives the rout of the buffer
 
-  use 'p00f/nvim-ts-rainbow' -- color same brackets with same color
+  use({ 'p00f/nvim-ts-rainbow', event = "BufReadPre" }) -- color same brackets with same color
 
   -- Colorschemes
-  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use 'olimorris/onedarkpro.nvim'
-  use "lunarvim/darkplus.nvim"
-  use 'folke/tokyonight.nvim'
-  use 'ishan9299/nvim-solarized-lua'
-  use 'patstockwell/vim-monokai-tasty'
-  use "rebelot/kanagawa.nvim"
+  use {
+    'olimorris/onedarkpro.nvim',
+    config = function()
+      require("user.colorscheme")
+    end
+  }
 
   use({
     "hrsh7th/nvim-cmp",
@@ -209,15 +221,6 @@ return packer.startup(function(use)
       "williamboman/nvim-lsp-installer",
     },
   }) -- lsp
-
-
-  -- Telescope
-  use({
-    "nvim-telescope/telescope.nvim",
-    config = function()
-      require("user.telescope")
-    end,
-  })
 
   -- Treesitter
   use({
