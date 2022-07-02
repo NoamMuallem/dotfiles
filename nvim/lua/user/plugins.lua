@@ -157,17 +157,6 @@ return packer.startup(function(use)
     end,
   }) -- move to any word on the buffer (quick navigation)
 
-  use({
-    "NoamMuallem/nvim-gps",
-    event = "BufReadPre",
-    requires = "nvim-treesitter/nvim-treesitter",
-    wants = "nvim-treesitter",
-    module = "nvim-gps",
-    config = function()
-      require("nvim-gps").setup({ separator = " " })
-    end,
-  }) -- gives the rout of the buffer
-
   use({ 'p00f/nvim-ts-rainbow', event = "BufReadPre" }) -- color same brackets with same color
 
   -- Colorschemes
