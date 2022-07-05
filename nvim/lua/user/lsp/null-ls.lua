@@ -14,6 +14,8 @@ null_ls.setup({
   },
   on_attach = function(client)
     if client.resolved_capabilities.document_formatting then
+      -- do not change formatting_sync to formatting (async)
+      -- will done formatting after save and will require another save
       vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     end
   end,
