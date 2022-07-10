@@ -82,7 +82,6 @@ return packer.startup(function(use)
   }) --project tree plugin
   use {
     'glepnir/galaxyline.nvim',
-    after = 'onedarkpro.nvim',
     branch = 'main',
     -- your statusline
     config = function() require 'user.galaxyline' end,
@@ -161,7 +160,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use {
-    'olimorris/onedarkpro.nvim',
+    'folke/tokyonight.nvim',
     config = function()
       require("user.colorscheme")
     end
