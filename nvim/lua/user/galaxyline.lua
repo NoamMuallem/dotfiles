@@ -34,34 +34,19 @@ end
 
 -- then change in colors line_bg = get_color_bg
 local colors = {
-    bg = "#282c34",
-    line_bg = "#353644",
+    bg = "#1b1a26",
+    line_bg = "#282638",
     fg = '#8FBCBB',
     fg_green = '#65a380',
-
-    yellow = '#fabd2f',
-    cyan = '#008080',
+    yellow = '#ECBE7B',
+    cyan     = '#008080',
     darkblue = '#081633',
-    green = '#afd700',
+    green = '#98be65',
     orange = '#FF8800',
     purple = '#5d4d7a',
     magenta = '#c678dd',
     blue = '#51afef';
     red = '#ec5f67'
---   bg        = "#33373E",
---   line_bg   = "#3D4147",
---   fg        = "#abb2bf",
---   red       = "#e06c75",
---   orange    = "#d19a66",
---   yellow    = "#e5c07b",
---   green     = "#98c379",
---   cyan      = "#56b6c2",
---   blue      = "#61afef",
---   purple    = "#c678dd",
---   white     = "#abb2bf",
---   black     = "#282c34",
---   gray      = "#5c6370",
---   highlight = "#e2be7d",
 }
 
 
@@ -190,7 +175,7 @@ gls.left[4] = {
   FileName = {
     provider = {get_current_file_name},
     condition = buffer_not_empty,
-    highlight = {colors.fg,colors.line_bg,'bold'}
+    highlight = {colors.white,colors.line_bg,'bold'}
   }
 }
 
@@ -238,18 +223,31 @@ gls.left[13] = {
 gls.left[14] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
-    icon = '   ',
+    icon = '   ',
     highlight = {colors.yellow,colors.bg},
   }
 }
 
+
+gls.left[15] = {
+  Space = {
+    provider = function () return '' end
+  }
+}
+gls.left[16] = {
+  DiagnosticHint = {
+    provider = 'DiagnosticHint',
+    icon = '  ',
+    highlight = {colors.cyan,colors.bg},
+  }
+}
 
 gls.right[1]= {
   FileFormat = {
     provider = function() return '  ' end,
     separator = ' ',
     separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.fg,colors.line_bg,'bold'},
+    highlight = {colors.yellow,colors.line_bg,'bold'},
   }
 }
 gls.right[2]= {
