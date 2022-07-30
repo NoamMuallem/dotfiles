@@ -49,6 +49,20 @@ return packer.startup(function(use)
   use "goolord/alpha-nvim" -- startup menu
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim" -- shows available commands durring input
+  use { 'axkirillov/easypick.nvim', requires = 'nvim-telescope/telescope.nvim',
+    config = function()
+      local easypick = require("easypick")
+      easypick.setup({
+        pickers = {
+          {
+            name = "conflicts",
+            command = "git diff --name-only --diff-filter=U --relative",
+            previewer = easypick.previewers.file_diff()
+          },
+        }
+      })
+    end
+  } -- make telescope group searches
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",

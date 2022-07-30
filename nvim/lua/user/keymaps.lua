@@ -102,5 +102,8 @@ vim.api.nvim_exec(
   false
 )
 
+-- toggle relative line numbers
+keymap("n","<Leader>rn","<cmd> set rnu! <CR>", opts)
+
 --exit edit mode
 keymap("i","jj", "<esc>",opts)
